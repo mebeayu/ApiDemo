@@ -39,10 +39,10 @@ namespace ApiDemo.Controllers.api
             return obj;
         }
         [HttpGet]
-        [Route("/getlist")]
-        public List<string> getlist()
+        [Route("/getlist/{item}")]
+        public List<string> getlist(string item)
         {
-            CorsHandler.list.Add("getlist");
+            CorsHandler.list.Add(item);
             return CorsHandler.list;
         }
     }
