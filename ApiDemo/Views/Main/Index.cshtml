@@ -1,0 +1,25 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/jquery.min.js"></script>
+    <title>Index</title>
+    <script>
+        
+        function bclick() {
+            var uid = $("#uid").val();
+            console.log(uid);
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="uid" />
+    <input type="button" onclick="bclick()"/>
+</body>
+</html>

@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="jquery.min.js"></script>
+    <title>Index</title>
+    <script>
+
+        function bclick() {
+            var uid = $("#uid").val();
+            console.log(uid);
+            var data = { uid: uid };
+            var url = "http://localhost:63865/postst";
+            $.ajax({
+                contentType: "application/json; charset=utf-8",	
+                type: 'POST',
+                url: url,
+                data: JSON.stringify(data),
+                beforeSend: function (xhr) { xhr.setRequestHeader('key', '2'); xhr.setRequestHeader('token', 'dsdsd'); },
+                success: function (data) {
+
+                    console.log(data);
+                },
+                error: function () { },
+                dataType: "json"
+            });
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="uid" />
+    <input type="button" onclick="bclick()" value="ddd" />
+</body>
+</html>
