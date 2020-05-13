@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using ApiDemo.Filter;
 using ApiDemo.M;
+using Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,7 +17,11 @@ namespace ApiDemo.Controllers.api
     
     public class DemoController : ControllerBase
     {
-
+        private IDB _db;
+        public DemoController(IDB dbsql)
+        {
+            _db = dbsql;
+        }
         [Route("/show/{id}")]
         [HttpGet]
         [ActionFilter]
@@ -44,6 +51,30 @@ namespace ApiDemo.Controllers.api
         {
             CorsHandler.list.Add(item);
             return CorsHandler.list;
+        }
+        [HttpGet]
+        [Route("/info")]
+        public dynamic info()
+        {
+
+            //Task<DataSet> getDs = getDS();
+            //int a = 1;
+            //DataSet ds = getDs.Result;
+            //return ds;
+            return "hello";
+        }
+        async Task<DataSet> getDS()
+        {
+            DataSet ds = null;
+            await Task.Run(()=>
+            {
+                Thread.Sleep(10000);
+                //ds = _db.ExeQuery("select * from sys_dept");
+
+                
+            });
+            return ds;
+
         }
     }
 }
