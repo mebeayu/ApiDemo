@@ -27,10 +27,28 @@
                 dataType: "json"
             });
         }
+		function bclick1(){
+			var data = { Page:1,PAgeSize:100,Param:"4" };
+            var url = "https://ym.bibo80s.com/API/ShopAPI/GetPubicShopGoodsList";
+            $.ajax({
+                contentType: "application/json; charset=utf-8",	
+                type: 'POST',
+                url: url,
+                data: JSON.stringify(data),
+                beforeSend: function (xhr) { xhr.setRequestHeader('key', '2'); xhr.setRequestHeader('token', 'dsdsd'); },
+                success: function (data) {
+
+                    console.log(data);
+                },
+                error: function () { },
+                dataType: "json"
+            });
+		}
     </script>
 </head>
 <body>
     <input type="text" id="uid" />
     <input type="button" onclick="bclick()" value="ddd" />
+	<input type="button" onclick="bclick1()" value="ccc" />
 </body>
 </html>
