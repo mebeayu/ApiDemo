@@ -57,11 +57,11 @@ namespace ApiDemo.Controllers.api
         public dynamic info()
         {
 
-            //Task<DataSet> getDs = getDS();
-            //int a = 1;
-            //DataSet ds = getDs.Result;
-            //return ds;
-            return "hello";
+            //DBSQL db = new DBSQL();
+            //db.ConnectSQLServerDB("10.43.4.16","zbb","jfsys","jfsys123");
+            //DataSet ds = db.ExeQuery("select * from 用户");
+            //return DBSQL.DataSetToList(ds);
+            return "hi";
         }
         [HttpGet]
         [Route("encode")]

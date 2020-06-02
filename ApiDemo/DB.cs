@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using Newtonsoft.Json;
 //using Oracle.ManagedDataAccess.Client;
 
 namespace Common
@@ -62,7 +63,27 @@ namespace Common
         {
             
         }
-
+        public static List<dynamic> DataSetToList(DataSet ds)
+        {
+            int col_count = ds.Tables[0].Columns.Count;
+            List<dynamic> list = new List<dynamic>();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                sb.Append("{");
+                for (int j = 0; j < col_count; j++)
+                {
+                    string str = $"\"{ds.Tables[0].Columns[j].ColumnName}\":\"{ds.Tables[0].Rows[i][ds.Tables[0].Columns[j].ColumnName].ToString()}\",";
+                    if (j == col_count - 1) str = str.Substring(0, str.Length - 1);
+                    sb.Append(str);
+                }
+                sb.Append("}");
+                dynamic obj = JsonConvert.DeserializeObject<dynamic>(sb.ToString());
+                list.Add(obj);
+                sb.Clear();
+            }
+            return list;
+        }
         public DBSQL(string strConnectString)
         {
             //"Data Source=10.43.4.16;Initial Catalog=zbb;Persist Security Info=True;User ID=jfsys;Password=jfsys123"
