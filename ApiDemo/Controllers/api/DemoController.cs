@@ -67,8 +67,7 @@ namespace ApiDemo.Controllers.api
         [Route("encode")]
         public string encode(string data)
         {
-            //return HashPassword(data);
-            return BCrypt.encode(data);
+            return BCrypt.Net.BCrypt.HashPassword(data);
         }
         async Task<DataSet> getDS()
         {

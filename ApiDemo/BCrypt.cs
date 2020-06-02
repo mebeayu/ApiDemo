@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApiDemo
 {
-    public class BCrypt
+    public class _BCrypt
     {
         private static int GENSALT_DEFAULT_LOG2_ROUNDS = 10;
         private static int BCRYPT_SALT_LEN = 16;
@@ -446,7 +446,7 @@ namespace ApiDemo
         }
         public static String hashpw(String password, String salt)
         {
-            BCrypt B;
+            _BCrypt B;
             String real_salt;
             byte[] passwordb, saltb, hashed;
             char minor = (char)0;
@@ -503,7 +503,7 @@ namespace ApiDemo
 
             saltb = decode_base64(real_salt, BCRYPT_SALT_LEN);
 
-            B = new BCrypt();
+            B = new _BCrypt();
             hashed = B.crypt_raw(passwordb, saltb, rounds);
 
             rs.Append("$2");
@@ -556,23 +556,23 @@ namespace ApiDemo
         {
             int strength = -1;
             Random random = null;
-            String salt = BCrypt.gensalt();
+            String salt = gensalt();
             if (strength > 0)
             {
                 if (random != null)
                 {
-                    salt = BCrypt.gensalt(strength, random);
+                    salt = gensalt(strength, random);
                 }
                 else
                 {
-                    salt = BCrypt.gensalt(strength);
+                    salt = gensalt(strength);
                 }
             }
             else
             {
-                salt = BCrypt.gensalt();
+                salt = gensalt();
             }
-            return BCrypt.hashpw(rawPassword, salt);
+            return hashpw(rawPassword, salt);
         }
         /**
          * Check that a plaintext password matches a previously hashed one
