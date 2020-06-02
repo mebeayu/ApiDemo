@@ -63,6 +63,13 @@ namespace ApiDemo.Controllers.api
             //return ds;
             return "hello";
         }
+        [HttpGet]
+        [Route("encode")]
+        public string encode(string data)
+        {
+            //return HashPassword(data);
+            return BCrypt.encode(data);
+        }
         async Task<DataSet> getDS()
         {
             DataSet ds = null;
